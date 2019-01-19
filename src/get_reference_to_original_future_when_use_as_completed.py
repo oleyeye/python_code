@@ -9,12 +9,12 @@ async def coro(sec):
 
 
 async def main():
-    futures = {asyncio.ensure_future(coro(i)): i for i in range(1,5)}    
+    futures = {asyncio.ensure_future(coro(i)): f'item({i})' for i in range(1,5)}    
 
     for future in as_completed_hooked(futures.keys()):
         real_future = await future
         index = futures[real_future]
-        print(f'The index is {index}')
+        print(f'The item is {index}')
         print(f'The result is {real_future.result()}')
 
 
